@@ -21,8 +21,11 @@ app.use(express.urlencoded({ extended: true }));
 
 // Database Connection
 mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/interior-company')
-  .then(() => console.log('MongoDB connected'))
-  .catch(err => console.log('MongoDB connection error:', err));
+  .then(() => console.log('✓ MongoDB connected'))
+  .catch(err => {
+    console.warn('⚠ MongoDB connection error:', err.message);
+    console.warn('⚠ Running in offline mode - data will not persist');
+  });
 
 // Routes
 app.use('/api/designs', designRoutes);
