@@ -1,0 +1,12 @@
+.image-banner {
+  max-width: 1400px;      
+  margin: 40px auto;      
+  padding: 0 20px;        
+}
+
+.image-banner img {
+  width: 100%;
+  height: auto;
+  border-radius: 18px;
+  display: block;
+}

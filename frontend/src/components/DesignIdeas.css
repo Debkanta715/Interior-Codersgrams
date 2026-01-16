@@ -1,0 +1,142 @@
+.design-section {
+  padding: 60px;
+  background: #fff;
+}
+
+.design-title {
+  text-align: center;
+  font-size: 28px;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+.design-subtitle {
+  text-align: center;
+  color: #666;
+  margin-bottom: 30px;
+}
+
+/* TABS */
+.tabs {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 35px;
+  flex-wrap: wrap;
+}
+
+.tabs button {
+  padding: 8px 16px;
+  border-radius: 8px;
+  border: none;
+  background: #f1f1f1;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.tabs .active {
+  background: #f45b74;
+  color: white;
+}
+
+/* GRID */
+.design-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 22px;
+}
+
+/* IMAGE CARD */
+.design-card {
+  position: relative;
+  border-radius: 14px;
+  overflow: hidden;
+  height: 230px;
+  cursor: pointer;
+}
+
+.design-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.overlay {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  padding: 14px;
+  background: linear-gradient(to top, rgba(0,0,0,0.75), transparent);
+  color: white;
+  font-size: 14px;
+}
+
+/* CTA CARD */
+.cta-card {
+  background: #2c2f63;
+  color: white;
+  border-radius: 16px;
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.cta-card h3 {
+  font-size: 20px;
+  line-height: 1.3;
+  margin-bottom: 18px;
+}
+
+.cta-card span {
+  color: #ff6b81;
+}
+
+.cta-card button {
+  width: fit-content;
+  padding: 8px 16px;
+  border-radius: 8px;
+  border: none;
+  background: #ff6b81;
+  color: white;
+  cursor: pointer;
+}
+.explore-more-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-top: 40px;
+}
+
+.explore-more-btn {
+  background-color: #f45b74;
+  color: white;
+  border: none;
+  padding: 12px 26px;
+  font-size: 15px;
+  font-weight: 600;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.explore-more-btn:hover {
+  background-color: #e14b64;
+  transform: translateY(-2px);
+}
+
+/* RESPONSIVE */
+@media (max-width: 1024px) {
+  .design-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .design-section {
+    padding: 30px 20px;
+  }
+
+  .design-grid {
+    grid-template-columns: 1fr;
+  }
+}

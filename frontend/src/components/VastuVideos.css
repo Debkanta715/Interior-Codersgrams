@@ -1,0 +1,118 @@
+
+.vastu-section {
+  position: relative;
+
+  /* 🔴 BACKGROUND SVG */
+  background-image: url("https://www.interiorcompany.com/assets/images/vastuBanerbgimg.svg");
+  background-repeat: no-repeat;
+  background-position: center top;
+  background-size: cover;
+  margin: 4em;
+
+  /* 🔴 COMPACT HEIGHT */
+  padding: 5px 0 55px;
+}
+
+/* CONTENT WRAPPER */
+.vastu-container {
+  max-width: 1200px;
+  margin: auto;
+  padding: 0 20px;
+}
+
+/* TITLE */
+.vastu-title {
+  text-align: center;
+  color: #ffffff;
+  font-size: 28px;
+  margin-bottom: 6px;
+}
+
+/* SUBTITLE */
+.vastu-subtitle {
+  text-align: center;
+  color: #f1dcdc;
+  font-size: 15px;
+  margin-bottom: 32px;
+}
+
+/* VIDEO GRID */
+.video-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+/* VIDEO CARD */
+.video-card {
+  color: #ffffff;
+}
+
+/* YOUTUBE FRAME */
+.video-frame {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border-radius: 10px;
+  overflow: hidden;
+  margin-bottom: 10px;
+}
+
+.video-frame iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+/* VIDEO TEXT */
+.video-card h4 {
+  font-size: 15px;
+  line-height: 1.3;
+  margin-bottom: 6px;
+}
+
+.video-card .desc {
+  font-size: 14px;
+  color: #f1dcdc;
+  margin-bottom: 6px;
+}
+
+.video-card .time {
+  font-size: 12px;
+  color: #e4bcbc;
+}
+
+/* VIEW ALL BUTTON */
+.view-all {
+  text-align: center;
+  margin-top: 28px;
+}
+
+.view-all button {
+  background: #f08a24;
+  color: #ffffff;
+  border: none;
+  padding: 12px 65px;
+  font-size: 16px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+
+/* RESPONSIVE */
+
+@media (max-width: 1000px) {
+  .video-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .video-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .vastu-title {
+    font-size: 24px;
+  }
+}
