@@ -1,4 +1,5 @@
 import Header from "./components/Header";
+import Banner from "./components/Banner";
 import ContentSection from "./components/ContentSection"
 import DesignIdeas from "./components/DesignIdeas"
 import VastuBanner from "./components/VastuBanner"
@@ -17,6 +18,7 @@ function App() {
   return (
     <>
       <Header />
+      <Banner />
       <ContentSection />
       <DesignIdeas />
       <VastuBanner />
