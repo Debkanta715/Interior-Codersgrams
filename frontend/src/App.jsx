@@ -8,6 +8,7 @@ import WhyChooseUs from "./components/WhyChooseUs"
 import WorkProcess from "./components/WorkProcess"
 import ComparisonSection from "./components/ComparisonSection"
 import VastuVideos from "./components/VastuVideos"
+import FeaturedBlogs from "./components/FeaturedBlogs";
 import Reviews from "./components/Review";
 import Footer from "./components/Footer";
 
@@ -26,6 +27,7 @@ function App() {
       <WorkProcess />
       <ComparisonSection />
       <VastuVideos />
+      <FeaturedBlogs />
       <Reviews/>
       <Footer />
     </>

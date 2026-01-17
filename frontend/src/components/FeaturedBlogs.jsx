@@ -4,20 +4,20 @@ const blogs = [
     id: 1,
     title: "Modern Living Room Designs That Never Go Out of Style",
     category: "Living Room",
-    image: "/blogs/blog1.jpg",
+    image: "/blog/blog1.jpeg",
     featured: true,
   },
   {
     id: 2,
     title: "10 Modular Kitchen Ideas for Indian Homes",
     category: "Kitchen",
-    image: "/blogs/blog2.jpg",
+    image: "/blog/blog1.jpeg",
   },
   {
     id: 3,
     title: "Bedroom Lighting Ideas for a Cozy Home",
     category: "Bedroom",
-    image: "/blogs/blog3.jpg",
+    image: "/blog/blog1.jpeg",
   },
 ];
 
