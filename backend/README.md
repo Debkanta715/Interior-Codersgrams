@@ -64,7 +64,7 @@ Edit the `.env` file with your settings:
 MONGODB_URI=mongodb://localhost:27017/interior-company
 
 # For MongoDB Atlas (cloud):
-# MONGODB_URI=mongodb+srv://username:password@cluster.mongodb.net/interior-company?retryWrites=true&w=majority
+# MONGODB_URI=contact with Arnab
 
 # Server Port
 PORT=5000

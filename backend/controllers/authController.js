@@ -35,11 +35,8 @@ const registerUser = async (req, res) => {
       email,
       phoneNumber,
       password: hashedPassword,
+      role: role && role.trim() !== "" ? role : undefined,
     });
-
-    if (role && role.trim() !== "") {
-      userData.role = role;
-    }
 
     if (user) {
       const token = generateToken(user._id, user.email, user.role);
