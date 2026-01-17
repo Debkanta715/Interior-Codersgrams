@@ -1,5 +1,5 @@
-const jwt = require("jsonwebtoken");
-const User = require("../models/User");
+import jwt from 'jsonwebtoken';
+import User from '../models/User.js';
 
 const protect = async (req, res, next) => {
   let token;
@@ -28,4 +28,11 @@ const protect = async (req, res, next) => {
   }
 };
 
-module.exports = { protect };
+const adminMiddleware = (req, res, next) => {
+  if (req.user?.role !== "admin") {
+    return res.status(403).json({ message: "Admin access required" });
+  }
+  next();
+};
+
+export { protect, adminMiddleware };

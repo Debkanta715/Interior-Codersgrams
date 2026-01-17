@@ -1,16 +1,23 @@
-import express from 'express';
-import Contact from '../models/Contact.js';
-import { authMiddleware, adminMiddleware } from '../middleware/auth.js';
+import express from "express";
+import Contact from "../models/Contact.js";
+import { protect, adminMiddleware } from "../middleware/authMiddleware.js";
 
 const router = express.Router();
 
+//Test Route
+router.get("/test", async (req, res) => {
+  res.status(200).json({ message: "Contact Route Working" });
+});
+
 // Submit contact form
-router.post('/submit', async (req, res) => {
+router.post("/submit", async (req, res) => {
   const { name, email, phone, city, subject, message } = req.body;
 
   try {
     if (!name || !email || !phone || !message) {
-      return res.status(400).json({ message: 'Name, email, phone and message are required' });
+      return res
+        .status(400)
+        .json({ message: "Name, email, phone and message are required" });
     }
 
     const contact = new Contact({
@@ -19,13 +26,13 @@ router.post('/submit', async (req, res) => {
       phone,
       city,
       subject,
-      message
+      message,
     });
 
     const savedContact = await contact.save();
     res.status(201).json({
-      message: 'Your message has been sent successfully',
-      contact: savedContact
+      message: "Your message has been sent successfully",
+      contact: savedContact,
     });
   } catch (error) {
     res.status(500).json({ message: error.message });
@@ -33,7 +40,7 @@ router.post('/submit', async (req, res) => {
 });
 
 // Get all messages (admin only)
-router.get('/messages', authMiddleware, adminMiddleware, async (req, res) => {
+router.get("/messages", protect, adminMiddleware, async (req, res) => {
   try {
     const messages = await Contact.find().sort({ createdAt: -1 });
     res.json(messages);
@@ -43,11 +50,11 @@ router.get('/messages', authMiddleware, adminMiddleware, async (req, res) => {
 });
 
 // Get specific message
-router.get('/message/:id', authMiddleware, adminMiddleware, async (req, res) => {
+router.get("/message/:id", protect, adminMiddleware, async (req, res) => {
   try {
     const message = await Contact.findById(req.params.id);
     if (!message) {
-      return res.status(404).json({ message: 'Message not found' });
+      return res.status(404).json({ message: "Message not found" });
     }
     res.json(message);
   } catch (error) {
@@ -56,7 +63,7 @@ router.get('/message/:id', authMiddleware, adminMiddleware, async (req, res) => 
 });
 
 // Update message status
-router.put('/message/:id', authMiddleware, adminMiddleware, async (req, res) => {
+router.put("/message/:id", protect, adminMiddleware, async (req, res) => {
   try {
     const { status } = req.body;
     const message = await Contact.findByIdAndUpdate(

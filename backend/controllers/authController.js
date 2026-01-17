@@ -1,6 +1,7 @@
-const bcrypt = require("bcrypt");
-const jwt = require("jsonwebtoken");
-const User = require("../models/User");
+import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
+import User from "../models/User.js";
+import { generateToken } from "../utils/utils.js";
 
 // @desc    Register a new user
 // @route   POST /api/users/register
@@ -34,10 +35,15 @@ const registerUser = async (req, res) => {
       email,
       phoneNumber,
       password: hashedPassword,
-      role, // Optional: defaults to 'customer' in model if not provided
     });
 
+    if (role && role.trim() !== "") {
+      userData.role = role;
+    }
+
     if (user) {
+      const token = generateToken(user._id, user.email, user.role);
+      res.cookie("token", token, { httpOnly: true, sameSite: "strict" });
       res.status(201).json({
         _id: user.id,
         firstName: user.firstName,
@@ -54,9 +60,7 @@ const registerUser = async (req, res) => {
   }
 };
 
-// @desc    Authenticate a user
 // @route   POST /api/users/login
-// @access  Public
 const loginUser = async (req, res) => {
   try {
     const { email, password } = req.body;
@@ -65,13 +69,15 @@ const loginUser = async (req, res) => {
     const user = await User.findOne({ email });
 
     if (user && (await bcrypt.compare(password, user.password))) {
+      const token = generateToken(user._id, user.email, user.role);
+      res.cookie("token", token, { httpOnly: true, sameSite: "strict" });
+
       res.json({
         _id: user.id,
         firstName: user.firstName,
         lastName: user.lastName,
         email: user.email,
         role: user.role,
-        token: generateToken(user._id),
       });
     } else {
       res.status(400).json({ message: "Invalid credentials" });
@@ -82,22 +88,4 @@ const loginUser = async (req, res) => {
   }
 };
 
-// @desc    Get current user
-// @route   GET /api/users/me
-// @access  Private
-const getMe = async (req, res) => {
-  res.status(200).json(req.user);
-};
-
-// Generate JWT
-const generateToken = (id) => {
-  return jwt.sign({ id }, process.env.JWT_SECRET, {
-    expiresIn: "30d",
-  });
-};
-
-module.exports = {
-  registerUser,
-  loginUser,
-  getMe,
-};
+export { registerUser, loginUser };

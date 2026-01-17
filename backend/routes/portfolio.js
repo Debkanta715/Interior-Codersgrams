@@ -1,19 +1,24 @@
-import express from 'express';
-import Portfolio from '../models/Portfolio.js';
-import { authMiddleware, adminMiddleware } from '../middleware/auth.js';
+import express from "express";
+import Portfolio from "../models/Portfolio.js";
+import { protect, adminMiddleware } from "../middleware/authMiddleware.js";
 
 const router = express.Router();
 
+//Test Route
+router.get("/test", async (req, res) => {
+  res.status(200).json({ message: "Portfolio Route Working" });
+});
+
 // Get all portfolio projects
-router.get('/', async (req, res) => {
+router.get("/", async (req, res) => {
   try {
     const { featured } = req.query;
     let query = {};
-    
-    if (featured === 'true') {
+
+    if (featured === "true") {
       query.featured = true;
     }
-    
+
     const projects = await Portfolio.find(query).sort({ createdAt: -1 });
     res.json(projects);
   } catch (error) {
@@ -22,11 +27,11 @@ router.get('/', async (req, res) => {
 });
 
 // Get specific project
-router.get('/:id', async (req, res) => {
+router.get("/:id", async (req, res) => {
   try {
     const project = await Portfolio.findById(req.params.id);
     if (!project) {
-      return res.status(404).json({ message: 'Project not found' });
+      return res.status(404).json({ message: "Project not found" });
     }
     res.json(project);
   } catch (error) {
@@ -35,12 +40,15 @@ router.get('/:id', async (req, res) => {
 });
 
 // Create project (admin only)
-router.post('/', authMiddleware, adminMiddleware, async (req, res) => {
+router.post("/", protect, adminMiddleware, async (req, res) => {
   try {
-    const { title, description, category, images, location, budget, duration } = req.body;
+    const { title, description, category, images, location, budget, duration } =
+      req.body;
 
     if (!title || !description || !category) {
-      return res.status(400).json({ message: 'Title, description and category are required' });
+      return res
+        .status(400)
+        .json({ message: "Title, description and category are required" });
     }
 
     const project = new Portfolio({
@@ -50,7 +58,7 @@ router.post('/', authMiddleware, adminMiddleware, async (req, res) => {
       images: images || [],
       location,
       budget,
-      duration
+      duration,
     });
 
     const savedProject = await project.save();
@@ -61,7 +69,7 @@ router.post('/', authMiddleware, adminMiddleware, async (req, res) => {
 });
 
 // Update project (admin only)
-router.put('/:id', authMiddleware, adminMiddleware, async (req, res) => {
+router.put("/:id", protect, adminMiddleware, async (req, res) => {
   try {
     const project = await Portfolio.findByIdAndUpdate(
       req.params.id,
@@ -70,7 +78,7 @@ router.put('/:id', authMiddleware, adminMiddleware, async (req, res) => {
     );
 
     if (!project) {
-      return res.status(404).json({ message: 'Project not found' });
+      return res.status(404).json({ message: "Project not found" });
     }
 
     res.json(project);
@@ -80,15 +88,15 @@ router.put('/:id', authMiddleware, adminMiddleware, async (req, res) => {
 });
 
 // Delete project (admin only)
-router.delete('/:id', authMiddleware, adminMiddleware, async (req, res) => {
+router.delete("/:id", protect, adminMiddleware, async (req, res) => {
   try {
     const project = await Portfolio.findByIdAndDelete(req.params.id);
 
     if (!project) {
-      return res.status(404).json({ message: 'Project not found' });
+      return res.status(404).json({ message: "Project not found" });
     }
 
-    res.json({ message: 'Project deleted successfully' });
+    res.json({ message: "Project deleted successfully" });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
