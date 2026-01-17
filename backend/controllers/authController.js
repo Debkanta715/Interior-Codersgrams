@@ -88,4 +88,33 @@ const loginUser = async (req, res) => {
   }
 };
 
-export { registerUser, loginUser };
+// @route   PUT /api/users/update-password
+const updatePassword = async (req, res) => {
+  try {
+    const { currentPassword, newPassword } = req.body;
+
+    if (!currentPassword || !newPassword) {
+      return res
+        .status(400)
+        .json({ message: "Please provide both current and new passwords" });
+    }
+
+    // Get user to verify password
+    const user = await User.findById(req.user.id);
+
+    if (user && (await bcrypt.compare(currentPassword, user.password))) {
+      const salt = await bcrypt.genSalt(10);
+      user.password = await bcrypt.hash(newPassword, salt);
+      await user.save();
+
+      res.json({ message: "Password updated successfully" });
+    } else {
+      res.status(400).json({ message: "Invalid current password" });
+    }
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Server error" });
+  }
+};
+
+export { registerUser, loginUser, updatePassword };

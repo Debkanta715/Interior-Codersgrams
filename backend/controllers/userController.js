@@ -11,11 +11,19 @@ export const getProfile = async (req, res) => {
 
 export const updateProfile = async (req, res) => {
   try {
-    const { name, phone, address, city } = req.body;
+    const { firstName, lastName, phoneNumber, email, profilePicture } =
+      req.body;
 
     const user = await User.findByIdAndUpdate(
       req.user.id,
-      { name, phone, address, city, updatedAt: Date.now() },
+      {
+        firstName,
+        lastName,
+        phoneNumber,
+        email,
+        profilePicture,
+        updatedAt: Date.now(),
+      },
       { new: true }
     ).select("-password");
 

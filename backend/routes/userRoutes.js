@@ -1,5 +1,9 @@
 import express from "express";
-import { registerUser, loginUser } from "../controllers/authController.js";
+import {
+  registerUser,
+  loginUser,
+  updatePassword,
+} from "../controllers/authController.js";
 import { protect } from "../middleware/authMiddleware.js";
 import { getProfile, updateProfile } from "../controllers/userController.js";
 
@@ -21,5 +25,8 @@ router.get("/profile", protect, getProfile);
 
 // Update user profile
 router.put("/profile", protect, updateProfile);
+
+// Update password
+router.put("/update-password", protect, updatePassword);
 
 export default router;
