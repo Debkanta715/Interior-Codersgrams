@@ -5,7 +5,7 @@ import cookieParser from "cookie-parser";
 import connectDB from "./config/mongooseConnection.js";
 import designRoutes from "./routes/designs.js";
 import userRoutes from "./routes/userRoutes.js";
-import contactRoutes from "./routes/contact.js";
+import contactRoutes from "./routes/contactRoutes.js";
 import portfolioRoutes from "./routes/portfolioRoutes.js";
 
 dotenv.config();
