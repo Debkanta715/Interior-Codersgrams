@@ -9,7 +9,7 @@ dotenv.config();
 
 // Import routes
 import designRoutes from './routes/designs.js';
-import userRoutes from './routes/users.js';
+import userRoutes from './routes/userRoutes.js';
 import contactRoutes from './routes/contact.js';
 import portfolioRoutes from './routes/portfolio.js';
 

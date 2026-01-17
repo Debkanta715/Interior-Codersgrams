@@ -26,7 +26,6 @@ function App() {
       <WorkProcess />
       <ComparisonSection />
       <VastuVideos />
-      <FeaturedBlogs/>
       <Reviews/>
       <Footer />
     </>
