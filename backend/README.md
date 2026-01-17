@@ -81,7 +81,7 @@ NODE_ENV=development
 ### Development Mode (with auto-reload)
 
 ```bash
-npm run dev
+nodemon index.js
 ```
 
 - Uses **nodemon** for automatic server restart on file changes
